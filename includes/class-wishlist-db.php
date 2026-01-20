@@ -24,11 +24,19 @@ class WC_Wishlist_DB {
 		) $charset_collate;";
 		dbDelta( $sql );
 	}
+	/**
+	 * Get wishlist table name
+ 	*/
+	private static function table_name() {
+    	global $wpdb;
+    	return $wpdb->prefix . 'wc_wishlists';
+	}
+
 
 	/**
 	 * CREATE: Add item to wishlist
 	 */
-	public static function add_to_wishlist( $user_id, $product_id, $variation_id = 0 ) {
+	public static function add_item( $user_id, $product_id, $variation_id = 0 ) {
 		global $wpdb;
 		$table = self::table_name();
 
