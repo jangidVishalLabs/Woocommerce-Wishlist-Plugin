@@ -37,11 +37,11 @@ class WC_Wishlist_Ajax {
 		if ( ! is_user_logged_in() ) {
 			wp_send_json_error( array( 'message' => 'User not logged in.' ) );
 		}
+		$user_id = get_current_user_id();
 		$product_id = absint( $_POST['product_id'] ?? 0 );
 		$variation_id = absint( $_POST['variation_id'] ?? 0 );
-		$user_id = get_current_user_id();
 
-		if ( ! $product_id || ! wc__get_product( $product_id ) ) {
+		if ( ! $product_id || ! wc_get_product( $product_id ) ) {
 			wp_send_json_error( array( 'message' => 'Invalid product.' ) );
 		}
 

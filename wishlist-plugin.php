@@ -16,6 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once plugin_dir_path( __FILE__ ) . 'includes/class-wishlist-db.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/class-wishlist-frontend.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/class-wishlist-ajax.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-wishlist-myaccount.php';
 
 register_activation_hook( __FILE__, 'wc_wishlist_plugin_activate' );
 
@@ -23,13 +24,14 @@ function wc_wishlist_plugin_activate() {
 	WC_Wishlist_DB::create_table();
 }
 WC_Wishlist_Ajax::init();
+WC_Wishlist_MyAccount::init();
 
 add_action( 'wp_enqueue_scripts', 'wc_wishlist_enqueue_scripts' );
 function wc_wishlist_enqueue_scripts() {
-	if( ! is_woocommerce() && ! is_product() ) {
+	if( ! is_woocommerce() && ! is_product()  && ! is_account_page() ) {
 		return;
 	}
-	wp_enqueue_style( 'wc-wishlist-style', plugin_dir_url( __FILE__ ) . 'assets/css/wishlist-style.css' );
+	wp_enqueue_style( 'wc-wishlist-style', plugin_dir_url( __FILE__ ) . 'assets/css/wishlist.css' );
 	wp_enqueue_script( 'wc-wishlist-script', plugin_dir_url( __FILE__ ) . 'assets/js/wishlist.js', array( 'jquery' ), 1.0, true );
 
 	wp_localize_script( 'wc-wishlist-script',

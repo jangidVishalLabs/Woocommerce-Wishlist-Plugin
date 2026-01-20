@@ -38,4 +38,26 @@ jQuery(function ($) {
         });
     });
 
+$(document).on('click', '.wc-remove-wishlist', function (e) {
+    e.preventDefault();
+
+    let btn = $(this);
+    let productId = btn.data('product-id');
+
+    $.post(wc_wishlist.ajax_url, {
+        action: 'wc_remove_from_wishlist',
+        product_id: productId,
+        variation_id: 0,
+        nonce: wc_wishlist.nonce
+    }, function (response) {
+
+        if (response.success) {
+            btn.closest('.wc-wishlist-card').fadeOut(300, function () {
+                $(this).remove();
+            });
+        }
+    });
+});
+
+
 });

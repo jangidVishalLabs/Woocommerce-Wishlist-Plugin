@@ -1,0 +1,17 @@
+.wc-wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.wc-wishlist-card {
+    border: 1px solid #eee;
+    padding: 15px;
+    text-align: center;
+}
+
+.wishlist-actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
